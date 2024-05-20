@@ -1,0 +1,21 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import Layout from "../../layouts/default.astro";
+
+export async function load({ params }) {
+    console.log('Load function is called with params:', params);
+    // Ваша логика загрузки данных
+}
+
+const news = await getCollection("news");
+const { slug } = Astro.params;
+const page = news.find((page) => page.slug === slug);
+if (!page) {
+	return new Response('Not Found', { status: 404 });
+}
+---
+
+<Layout>
+  123
+  {JSON.stringify(page, true)}
+</Layout>

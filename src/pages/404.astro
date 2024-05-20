@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/default.astro'
+import { getCollection } from "astro:content";
+const pathname = Astro.url.pathname;
+let posts:any = [];
+if(pathname.includes('/news/')){
+	posts = await getCollection('news')
+}
+---
+
+<Layout>
+	<h1>404</h1>
+	{posts.length > 0 && (
+		<div>
+			<h2>Смотрите также</h2>
+			{posts.map(post => ( <code>{JSON.stringify(post)}</code><br /> ))}
+		</div>
+	)}
+</Layout>
